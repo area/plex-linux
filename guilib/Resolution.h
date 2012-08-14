@@ -85,6 +85,8 @@ struct RESOLUTION_INFO
   int iScreen;
   int iWidth;
   int iHeight;
+  int iScreenWidth;
+  int iScreenHeight;
   int iSubtitles;
   uint32_t dwFlags;
   float fPixelRatio;
