@@ -143,6 +143,8 @@ public:
   virtual bool Supports(ERENDERFEATURE feature);
   virtual bool Supports(EINTERLACEMETHOD method);
   virtual bool Supports(ESCALINGMETHOD method);
+  
+  virtual void SetRGB32Image(const char *image, int nHeight, int nWidth, int nPitch);
 
 protected:
   virtual void Render(DWORD flags, int renderBuffer);

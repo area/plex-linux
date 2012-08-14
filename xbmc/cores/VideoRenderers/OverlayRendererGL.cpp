@@ -60,7 +60,7 @@ static void LoadTexture(GLenum target
 #ifndef HAS_GLES
   glPixelStorei(GL_UNPACK_ALIGNMENT,1);
   if(externalFormat == GL_RGBA
-  || externalFormat == GL_BGRA)
+  || externalFormat == GL_RGBA)
     glPixelStorei(GL_UNPACK_ROW_LENGTH, stride / 4);
   else if(externalFormat == GL_RGB
        || externalFormat == GL_BGR)
@@ -125,7 +125,7 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlayImage* o)
             , o->width * 4
             , &m_u, &m_v
             , GL_RGBA
-            , GL_BGRA
+            , GL_RGBA
             , rgba);
   free(rgba);
 
@@ -199,7 +199,7 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlaySpu* o)
             , o->width * 4
             , &m_u, &m_v
             , GL_RGBA
-            , GL_BGRA
+            , GL_RGBA
             , rgba + min_x + min_y * o->width);
 
   free(rgba);

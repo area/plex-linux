@@ -122,6 +122,39 @@ CLinuxRendererGLES::~CLinuxRendererGLES()
   delete m_dllAvUtil;
 }
 
+void CLinuxRendererGLES::SetRGB32Image(const char *image, int nHeight, int nWidth, int nPitch)
+{
+  CSingleLock lock(g_graphicsContext);
+  if (m_rgbBuffer == 0)
+  {
+    m_rgbBufferSize = nWidth*nHeight*4;
+    m_rgbBuffer = new BYTE[m_rgbBufferSize];
+    memset(m_rgbBuffer, 0, m_rgbBufferSize);
+  }
+  
+  if (nHeight * nWidth * 4 > m_rgbBufferSize)
+  {
+    CLog::Log(LOGERROR,"%s, incorrect image size", __FUNCTION__);
+    return;
+  }
+
+  if (nPitch == nWidth * 4)
+    memcpy(m_rgbBuffer, image, nHeight * nPitch);
+  else
+    for (int i=0; i<nHeight; i++)
+      memcpy(m_rgbBuffer + (i * nWidth * 4), image + (i * nPitch),  nWidth * 4);
+  
+  //m_bRGBImageSet = true;
+  m_renderMethod = RENDER_SW;
+  
+  if (m_pYUVShader)
+  {
+    delete m_pYUVShader;
+    m_pYUVShader = NULL;
+  }
+}
+
+
 void CLinuxRendererGLES::ManageTextures()
 {
   m_NumYV12Buffers = 2;
